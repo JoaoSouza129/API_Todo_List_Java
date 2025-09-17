@@ -14,12 +14,12 @@ public class TarefaController {
     private TarefaService tarefaService;
 
     @PostMapping("/create")
-    public ResponseEntity<TarefaModel> create(@RequestBody TarefaModel tarefaModel) {
-        return ResponseEntity.ok(tarefaService.salvar(tarefaModel));
+    public ResponseEntity<Tarefa> create(@RequestBody Tarefa tarefa) {
+        return ResponseEntity.ok(tarefaService.salvar(tarefa));
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<TarefaModel>> listarTarefa() {
+    public ResponseEntity<List<Tarefa>> listarTarefa() {
         return ResponseEntity.ok(tarefaService.listarTarefas());
     }
 
@@ -27,5 +27,11 @@ public class TarefaController {
     public ResponseEntity<String> removerTarefa(@PathVariable("id") Long id) {
         tarefaService.removerTarefa(id);
         return ResponseEntity.ok("Tarefa removido com sucesso");
+    }
+
+    @PutMapping("/concluido/{id}")
+    public ResponseEntity<String> concluirTarefa(@PathVariable("id") Long id) {
+        tarefaService.MarcarConcluida(id);
+        return ResponseEntity.ok("Tarefa concluido com sucesso");
     }
 }

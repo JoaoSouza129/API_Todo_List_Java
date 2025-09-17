@@ -1,5 +1,6 @@
 package com.todo.list.api_todo_list.functions;
 
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,15 +13,21 @@ public class TarefaService {
     TarefaRepository tarefaRepository;
 
 
-    public TarefaModel salvar(TarefaModel tarefa) {
+    public Tarefa salvar(Tarefa tarefa) {
         return tarefaRepository.save(tarefa);
     }
 
-    public List<TarefaModel> listarTarefas() {
+    public List<Tarefa> listarTarefas() {
         return tarefaRepository.findAll();
     }
 
     public void removerTarefa(Long id) {
         tarefaRepository.deleteById(id);
+    }
+
+    @Transactional
+    public void MarcarConcluida(Long id) {
+        tarefaRepository.marcarTarefaComoConcluida(id);
+
     }
 }

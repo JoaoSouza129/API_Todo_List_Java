@@ -3,29 +3,30 @@ package com.todo.list.api_todo_list.functions;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Tarefa")
-public class TarefaModel {
+@Table(name="Tarefa")
+public class Tarefa {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
     private String nome;
     private String descricao;
-    private int status;
+    private boolean status;
     private String concluido;
     private int prioridade;
     private String tipodePrio;
 
-    public TarefaModel(String nome, String descricao, String tipodePrio) {
+    public Tarefa(String nome, String descricao, String tipodePrio) {
         this.nome = nome;
         this.descricao = descricao;
-        this.status = 0;
+        this.status = false;
         this.concluido="Não concluido";
         this.tipodePrio = tipodePrio;
 
     }
+    public Tarefa() {}
 
-    public TarefaModel() {
-
+    public Long getId() {
+        return id;
     }
 
     public String getNome() {
@@ -44,11 +45,11 @@ public class TarefaModel {
         this.descricao = descricao;
     }
 
-    public int isStatus() {
+    public boolean isStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(boolean status) {
         this.status = status;
     }
 
@@ -73,7 +74,7 @@ public class TarefaModel {
     }
 
     public String getConcluido() {
-        if (status==0){
+        if (!status){
             return "Não concluido";
         }else
             return "Concluido";
