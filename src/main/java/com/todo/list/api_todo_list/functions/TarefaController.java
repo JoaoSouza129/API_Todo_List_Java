@@ -34,4 +34,11 @@ public class TarefaController {
         tarefaService.MarcarConcluida(id);
         return ResponseEntity.ok("Tarefa concluido com sucesso");
     }
+
+
+    @PutMapping("/edit/{id}")
+    public ResponseEntity<String> editarTarefa(@PathVariable("id") Long id, @RequestBody Tarefa t) {
+        tarefaService.editarTarefa(id, t);
+        return ResponseEntity.ok("Tarefa editada com sucesso");
+    }
 }

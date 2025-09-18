@@ -30,4 +30,9 @@ public class TarefaService {
         tarefaRepository.marcarTarefaComoConcluida(id);
 
     }
+
+    @Transactional
+    public void editarTarefa(Long id, Tarefa t) {
+        tarefaRepository.editarTarefa(id, t.getNome(), t.getDescricao(), t.getTipodePrio());
+    }
 }

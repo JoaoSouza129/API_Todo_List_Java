@@ -9,6 +9,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TarefaRepository extends JpaRepository<Tarefa, Long> {
     @Modifying
-    @Query("update Tarefa t set t.status=true where t.id=:id ")
+    @Query("update Tarefa t set t.status=true, t.concluido='Concluido' where t.id=:id ")
     public void marcarTarefaComoConcluida(@Param("id") Long idTarefa);
+
+
+    @Modifying
+    @Query("update Tarefa t set t.nome=:nome, t.descricao=:descricao, t.tipodePrio=:tipodePrio where t.id=:id")
+    public void editarTarefa(@Param("id") Long id, @Param("nome") String nome, @Param("descricao") String descricao, @Param("tipodePrio") String tipodePrio);
 }
